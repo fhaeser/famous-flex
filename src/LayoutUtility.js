@@ -18,9 +18,6 @@
  */
 define(function(require, exports, module) {
 
-    // import dependencies
-    var Utility = require('famous/utilities/Utility');
-
     /**
      * @class
      * @alias module:LayoutUtility

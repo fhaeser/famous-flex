@@ -23,7 +23,6 @@ famousflex.layouts = famousflex.layouts || {};
 famousflex.layouts.CollectionLayout = require('./src/layouts/CollectionLayout');
 famousflex.layouts.CoverLayout = require('./src/layouts/CoverLayout');
 famousflex.layouts.CubeLayout = require('./src/layouts/CubeLayout');
-famousflex.layouts.GridLayout = require('./src/layouts/GridLayout');
 famousflex.layouts.HeaderFooterLayout = require('./src/layouts/HeaderFooterLayout');
 famousflex.layouts.ListLayout = require('./src/layouts/ListLayout');
 famousflex.layouts.NavBarLayout = require('./src/layouts/NavBarLayout');

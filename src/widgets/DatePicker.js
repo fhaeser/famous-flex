@@ -52,10 +52,9 @@
 define(function(require, exports, module) {
 
     // import dependencies
-    var View = require('famous/core/View');
-    var Surface = require('famous/core/Surface');
-    var Utility = require('famous/utilities/Utility');
-    var ContainerSurface = require('famous/surfaces/ContainerSurface');
+    var View = require('samsara/core/View');
+    var Surface = require('samsara/dom/Surface');
+    var ContainerSurface = require('samsara/dom/ContainerSurface');
     var LayoutController = require('../LayoutController');
     var ScrollController = require('../ScrollController');
     var WheelLayout = require('../layouts/WheelLayout');

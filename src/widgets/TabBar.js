@@ -64,8 +64,8 @@
 define(function(require, exports, module) {
 
     // import dependencies
-    var Surface = require('famous/core/Surface');
-    var View = require('famous/core/View');
+    var Surface = require('samsara/dom/Surface');
+    var View = require('samsara/core/View');
     var LayoutController = require('../LayoutController');
     var TabBarLayout = require('../layouts/TabBarLayout');
 

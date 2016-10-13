@@ -16,14 +16,15 @@
 define(function(require, exports, module) {
 
     // import dependencies
-    var OptionsManager = require('famous/core/OptionsManager');
-    var Transform = require('famous/core/Transform');
-    var Vector = require('famous/math/Vector');
-    var Particle = require('famous/physics/bodies/Particle');
-    var Spring = require('famous/physics/forces/Spring');
-    var PhysicsEngine = require('famous/physics/PhysicsEngine');
+    var OptionsManager = require('samsara/core/_OptionsManager');
+    var Transform = require('samsara/core/Transform');
+    //FIXME
+    // var Vector = require('famous/math/Vector');
+    // var Particle = require('famous/physics/bodies/Particle');
+    // var Spring = require('famous/physics/forces/Spring');
+    // var PhysicsEngine = require('famous/physics/PhysicsEngine');
     var LayoutNode = require('./LayoutNode');
-    var Transitionable = require('famous/transitions/Transitionable');
+    var Transitionable = require('samsara/core/Transitionable');
 
     /**
      * @class

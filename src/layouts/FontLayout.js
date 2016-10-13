@@ -54,13 +54,17 @@
  */
 define(function(require, exports, module) {
 
-    // import dependencies
-    var Utility = require('famous/utilities/Utility');
+    var CONSTANTS = {
+        DIRECTION : {
+            X : 0,
+            Y : 1
+        }
+    };
 
     // Define capabilities of this layout function
     var capabilities = {
         sequence: true,
-        direction: [Utility.Direction.X, Utility.Direction.Y]
+        direction: [CONSTANTS.DIRECTION.Y, CONSTANTS.DIRECTION.X]
     };
 
     // Character-segments are layed out in clockwise order:

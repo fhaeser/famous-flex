@@ -18,7 +18,6 @@ define(function(require) {
     require('famous-flex/layouts/CollectionLayout');
     require('famous-flex/layouts/CoverLayout');
     require('famous-flex/layouts/CubeLayout');
-    require('famous-flex/layouts/GridLayout');
     require('famous-flex/layouts/HeaderFooterLayout');
     require('famous-flex/layouts/ListLayout');
     require('famous-flex/layouts/NavBarLayout');

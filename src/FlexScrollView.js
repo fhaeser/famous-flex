@@ -40,7 +40,7 @@ define(function(require, exports, module) {
         PULLING: 1,
         ACTIVE: 2,
         COMPLETED: 3,
-        HIDDING: 4
+        HIDING: 4
     };
 
     /**
@@ -328,14 +328,14 @@ define(function(require, exports, module) {
                     case PullToRefreshState.COMPLETED:
                         if (!this._scroll.scrollForceCount) {
                             if (offset >= 0.2) {
-                                _setPullToRefreshState(pullToRefresh, PullToRefreshState.HIDDING);
+                                _setPullToRefreshState(pullToRefresh, PullToRefreshState.HIDING);
                             }
                             else {
                                 _setPullToRefreshState(pullToRefresh, PullToRefreshState.HIDDEN);
                             }
                         }
                         break;
-                    case PullToRefreshState.HIDDING:
+                    case PullToRefreshState.HIDING:
                         if (offset < 0.2) {
                             _setPullToRefreshState(pullToRefresh, PullToRefreshState.HIDDEN);
                         }

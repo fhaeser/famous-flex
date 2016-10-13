@@ -16,12 +16,13 @@
 define(function(require, exports, module) {
 
     // import dependencies
-    var View = require('famous/core/View');
+    var View = require('samsara/core/View');
     var AnimationController = require('../AnimationController');
     var TabBar = require('./TabBar');
     var LayoutDockHelper = require('../helpers/LayoutDockHelper');
     var LayoutController = require('../LayoutController');
-    var Easing = require('famous/transitions/Easing');
+    //FIXME
+    // var Easing = require('famous/transitions/Easing');
 
     /**
      * @class

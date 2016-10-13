@@ -27,8 +27,8 @@ define(function(require, exports, module) {
     // import dependencies
     var LayoutContext = require('./LayoutContext');
     var LayoutUtility = require('./LayoutUtility');
-    var Surface = require('famous/core/Surface');
-    var RenderNode = require('famous/core/RenderNode');
+    var Surface = require('samsara/dom/Surface');
+    var RenderNode = require('samsara/core/nodes/RenderTreeNode');
 
     var MAX_POOL_SIZE = 100;
 

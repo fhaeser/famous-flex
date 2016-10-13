@@ -28,18 +28,25 @@
 define(function(require, exports, module) {
 
     // import dependencies
-    var Utility = require('famous/utilities/Utility');
-    var Entity = require('famous/core/Entity');
-    var ViewSequence = require('famous/core/ViewSequence');
+    var Entity = require('samsara/core/nodes/Node');
+    // var ViewSequence = require('samsara/core/ViewSequence');
     var LinkedListViewSequence = require('./LinkedListViewSequence');
-    var OptionsManager = require('famous/core/OptionsManager');
-    var EventHandler = require('famous/core/EventHandler');
+    var OptionsManager = require('samsara/core/_OptionsManager');
+    var EventHandler = require('samsara/events/EventHandler');
     var LayoutUtility = require('./LayoutUtility');
     var LayoutNodeManager = require('./LayoutNodeManager');
     var LayoutNode = require('./LayoutNode');
     var FlowLayoutNode = require('./FlowLayoutNode');
-    var Transform = require('famous/core/Transform');
+    var Transform = require('samsara/core/Transform');
     require('./helpers/LayoutDockHelper');
+
+    var CONSTANTS = {
+        DIRECTION : {
+            X : 0,
+            Y : 1
+        }
+    };
+
 
     /**
      * @class
@@ -435,7 +442,7 @@ define(function(require, exports, module) {
         }
 
         // Use Y-direction as a fallback
-        return (direction === undefined) ? Utility.Direction.Y : direction;
+        return (direction === undefined) ? CONSTANTS.DIRECTION.Y : direction;
     }
 
     /**

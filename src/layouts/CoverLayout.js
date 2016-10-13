@@ -41,13 +41,16 @@
  */
 define(function(require, exports, module) {
 
-    // import dependencies
-    var Utility = require('famous/utilities/Utility');
-
+    var CONSTANTS = {
+        DIRECTION : {
+            X : 0,
+            Y : 1
+        }
+    };
     // Define capabilities of this layout function
     var capabilities = {
         sequence: true,
-        direction: [Utility.Direction.Y, Utility.Direction.X],
+        direction: [CONSTANTS.DIRECTION.Y, CONSTANTS.DIRECTION.X],
         scrolling: true,
         trueSize: true,
         sequentialScrollingOptimized: false

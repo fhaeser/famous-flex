@@ -64,7 +64,6 @@ module.exports = function(grunt) {
             { src: 'src/helpers/LayoutDockHelper.js', dest: 'docs/helpers/LayoutDockHelper.md' },
             // layouts
             { src: 'src/layouts/CollectionLayout.js', dest: 'docs/layouts/CollectionLayout.md' },
-            { src: 'src/layouts/GridLayout.js', dest: 'docs/layouts/GridLayout.md' },
             { src: 'src/layouts/ListLayout.js', dest: 'docs/layouts/ListLayout.md' },
             { src: 'src/layouts/HeaderFooterLayout.js', dest: 'docs/layouts/HeaderFooterLayout.md' },
             { src: 'src/layouts/NavBarLayout.js', dest: 'docs/layouts/NavBarLayout.md' },
@@ -83,6 +82,7 @@ module.exports = function(grunt) {
           out: 'dist/famous-flex.js',
           paths: {
             'famous': 'empty:',
+            'samsara': 'empty:',
             'famous-flex': './src'
           },
           optimize: 'none'

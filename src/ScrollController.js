@@ -43,16 +43,17 @@ define(function(require, exports, module) {
     var LayoutNode = require('./LayoutNode');
     var FlowLayoutNode = require('./FlowLayoutNode');
     var LayoutNodeManager = require('./LayoutNodeManager');
-    var ContainerSurface = require('famous/surfaces/ContainerSurface');
-    var Transform = require('famous/core/Transform');
-    var EventHandler = require('famous/core/EventHandler');
-    var Group = require('famous/core/Group');
-    var Vector = require('famous/math/Vector');
-    var PhysicsEngine = require('famous/physics/PhysicsEngine');
-    var Particle = require('famous/physics/bodies/Particle');
-    var Drag = require('famous/physics/forces/Drag');
-    var Spring = require('famous/physics/forces/Spring');
-    var ScrollSync = require('famous/inputs/ScrollSync');
+    var ContainerSurface = require('samsara/dom/ContainerSurface');
+    var Transform = require('samsara/core/Transform');
+    var EventHandler = require('samsara/events/EventHandler');
+        //FIXME
+//     var Group = require('famous/core/Group');
+//     var Vector = require('famous/math/Vector');
+//     var PhysicsEngine = require('famous/physics/PhysicsEngine');
+//     var Particle = require('famous/physics/bodies/Particle');
+//     var Drag = require('famous/physics/forces/Drag');
+//     var Spring = require('famous/physics/forces/Spring');
+    var ScrollSync = require('samsara/inputs/ScrollInput');
     var LinkedListViewSequence = require('./LinkedListViewSequence');
 
     /**

@@ -16,14 +16,13 @@
 define(function(require, exports, module) {
 
     // import dependencies
-    var View = require('famous/core/View');
+    var View = require('samsara/core/View');
     var LayoutController = require('./LayoutController');
-    var Transform = require('famous/core/Transform');
-    var Modifier = require('famous/core/Modifier');
-    var StateModifier = require('famous/modifiers/StateModifier');
-    var RenderNode = require('famous/core/RenderNode');
-    var Timer = require('famous/utilities/Timer');
-    var Easing = require('famous/transitions/Easing');
+    var Transform = require('samsara/core/Transform');
+    var Modifier = require('samsara/core/nodes/SizeNode');
+    var StateModifier = require('samsara/core/nodes/LayoutNode');
+    var RenderNode = require('samsara/core/nodes/RenderTreeNode');
+    var Timer = require('samsara/core/Timer');
 
     /**
      * @class

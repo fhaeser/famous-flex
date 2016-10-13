@@ -16,7 +16,7 @@
 define(function(require, exports, module) {
 
     // import dependencies
-    var Transform = require('famous/core/Transform');
+    var Transform = require('samsara/core/Transform');
     var LayoutUtility = require('./LayoutUtility');
 
     /**

@@ -1,17 +1,4 @@
 /**
-* This Source Code is licensed under the MIT license. If a copy of the
-* MIT-license was not distributed with this file, You can obtain one at:
-* http://opensource.org/licenses/mit-license.html.
-*
-* @author: Hein Rutjes (IjzerenHein)
-* @license MIT
-* @copyright Gloey Apps, 2014/2015
-*
-* @library famous-flex
-* @version 0.3.9
-* @generated 11-04-2016
-*/
-/**
  * This Source Code is licensed under the MIT license. If a copy of the
  * MIT-license was not distributed with this file, You can obtain one at:
  * http://opensource.org/licenses/mit-license.html.
@@ -29,10 +16,7 @@
  *
  * @module
  */
-define('famous-flex/LayoutUtility',['require','exports','module','famous/utilities/Utility'],function(require, exports, module) {
-
-    // import dependencies
-    var Utility = require('famous/utilities/Utility');
+define('famous-flex/LayoutUtility',['require','exports','module'],function(require, exports, module) {
 
     /**
      * @class
@@ -1006,13 +990,13 @@ define('famous-flex/LayoutContext',['require','exports','module'],function(requi
  *
  * @module
  */
-define('famous-flex/LayoutNodeManager',['require','exports','module','./LayoutContext','./LayoutUtility','famous/core/Surface','famous/core/RenderNode'],function(require, exports, module) {
+define('famous-flex/LayoutNodeManager',['require','exports','module','./LayoutContext','./LayoutUtility','samsara/dom/Surface','samsara/core/nodes/RenderTreeNode'],function(require, exports, module) {
 
     // import dependencies
     var LayoutContext = require('./LayoutContext');
     var LayoutUtility = require('./LayoutUtility');
-    var Surface = require('famous/core/Surface');
-    var RenderNode = require('famous/core/RenderNode');
+    var Surface = require('samsara/dom/Surface');
+    var RenderNode = require('samsara/core/nodes/RenderTreeNode');
 
     var MAX_POOL_SIZE = 100;
 
@@ -1795,10 +1779,10 @@ define('famous-flex/LayoutNodeManager',['require','exports','module','./LayoutCo
  *
  * @module
  */
-define('famous-flex/LayoutNode',['require','exports','module','famous/core/Transform','./LayoutUtility'],function(require, exports, module) {
+define('famous-flex/LayoutNode',['require','exports','module','samsara/core/Transform','./LayoutUtility'],function(require, exports, module) {
 
     // import dependencies
-    var Transform = require('famous/core/Transform');
+    var Transform = require('samsara/core/Transform');
     var LayoutUtility = require('./LayoutUtility');
 
     /**
@@ -1996,17 +1980,18 @@ define('famous-flex/LayoutNode',['require','exports','module','famous/core/Trans
  *
  * @module
  */
-define('famous-flex/FlowLayoutNode',['require','exports','module','famous/core/OptionsManager','famous/core/Transform','famous/math/Vector','famous/physics/bodies/Particle','famous/physics/forces/Spring','famous/physics/PhysicsEngine','./LayoutNode','famous/transitions/Transitionable'],function(require, exports, module) {
+define('famous-flex/FlowLayoutNode',['require','exports','module','samsara/core/_OptionsManager','samsara/core/Transform','./LayoutNode','samsara/core/Transitionable'],function(require, exports, module) {
 
     // import dependencies
-    var OptionsManager = require('famous/core/OptionsManager');
-    var Transform = require('famous/core/Transform');
-    var Vector = require('famous/math/Vector');
-    var Particle = require('famous/physics/bodies/Particle');
-    var Spring = require('famous/physics/forces/Spring');
-    var PhysicsEngine = require('famous/physics/PhysicsEngine');
+    var OptionsManager = require('samsara/core/_OptionsManager');
+    var Transform = require('samsara/core/Transform');
+    //FIXME
+    // var Vector = require('famous/math/Vector');
+    // var Particle = require('famous/physics/bodies/Particle');
+    // var Spring = require('famous/physics/forces/Spring');
+    // var PhysicsEngine = require('famous/physics/PhysicsEngine');
     var LayoutNode = require('./LayoutNode');
-    var Transitionable = require('famous/transitions/Transitionable');
+    var Transitionable = require('samsara/core/Transitionable');
 
     /**
      * @class
@@ -2845,21 +2830,28 @@ define('famous-flex/helpers/LayoutDockHelper',['require','exports','module','../
  *
  * @module
  */
-define('famous-flex/LayoutController',['require','exports','module','famous/utilities/Utility','famous/core/Entity','famous/core/ViewSequence','./LinkedListViewSequence','famous/core/OptionsManager','famous/core/EventHandler','./LayoutUtility','./LayoutNodeManager','./LayoutNode','./FlowLayoutNode','famous/core/Transform','./helpers/LayoutDockHelper'],function(require, exports, module) {
+define('famous-flex/LayoutController',['require','exports','module','samsara/core/nodes/Node','./LinkedListViewSequence','samsara/core/_OptionsManager','samsara/events/EventHandler','./LayoutUtility','./LayoutNodeManager','./LayoutNode','./FlowLayoutNode','samsara/core/Transform','./helpers/LayoutDockHelper'],function(require, exports, module) {
 
     // import dependencies
-    var Utility = require('famous/utilities/Utility');
-    var Entity = require('famous/core/Entity');
-    var ViewSequence = require('famous/core/ViewSequence');
+    var Entity = require('samsara/core/nodes/Node');
+    // var ViewSequence = require('samsara/core/ViewSequence');
     var LinkedListViewSequence = require('./LinkedListViewSequence');
-    var OptionsManager = require('famous/core/OptionsManager');
-    var EventHandler = require('famous/core/EventHandler');
+    var OptionsManager = require('samsara/core/_OptionsManager');
+    var EventHandler = require('samsara/events/EventHandler');
     var LayoutUtility = require('./LayoutUtility');
     var LayoutNodeManager = require('./LayoutNodeManager');
     var LayoutNode = require('./LayoutNode');
     var FlowLayoutNode = require('./FlowLayoutNode');
-    var Transform = require('famous/core/Transform');
+    var Transform = require('samsara/core/Transform');
     require('./helpers/LayoutDockHelper');
+
+    var CONSTANTS = {
+        DIRECTION : {
+            X : 0,
+            Y : 1
+        }
+    };
+
 
     /**
      * @class
@@ -3255,7 +3247,7 @@ define('famous-flex/LayoutController',['require','exports','module','famous/util
         }
 
         // Use Y-direction as a fallback
-        return (direction === undefined) ? Utility.Direction.Y : direction;
+        return (direction === undefined) ? CONSTANTS.DIRECTION.Y : direction;
     }
 
     /**
@@ -3903,7 +3895,7 @@ define('famous-flex/LayoutController',['require','exports','module','famous/util
  * Inherited from: [LayoutController](./LayoutController.md)
  * @module
  */
-define('famous-flex/ScrollController',['require','exports','module','./LayoutUtility','./LayoutController','./LayoutNode','./FlowLayoutNode','./LayoutNodeManager','famous/surfaces/ContainerSurface','famous/core/Transform','famous/core/EventHandler','famous/core/Group','famous/math/Vector','famous/physics/PhysicsEngine','famous/physics/bodies/Particle','famous/physics/forces/Drag','famous/physics/forces/Spring','famous/inputs/ScrollSync','./LinkedListViewSequence'],function(require, exports, module) {
+define('famous-flex/ScrollController',['require','exports','module','./LayoutUtility','./LayoutController','./LayoutNode','./FlowLayoutNode','./LayoutNodeManager','samsara/dom/ContainerSurface','samsara/core/Transform','samsara/events/EventHandler','samsara/inputs/ScrollInput','./LinkedListViewSequence'],function(require, exports, module) {
 
     // import dependencies
     var LayoutUtility = require('./LayoutUtility');
@@ -3911,16 +3903,17 @@ define('famous-flex/ScrollController',['require','exports','module','./LayoutUti
     var LayoutNode = require('./LayoutNode');
     var FlowLayoutNode = require('./FlowLayoutNode');
     var LayoutNodeManager = require('./LayoutNodeManager');
-    var ContainerSurface = require('famous/surfaces/ContainerSurface');
-    var Transform = require('famous/core/Transform');
-    var EventHandler = require('famous/core/EventHandler');
-    var Group = require('famous/core/Group');
-    var Vector = require('famous/math/Vector');
-    var PhysicsEngine = require('famous/physics/PhysicsEngine');
-    var Particle = require('famous/physics/bodies/Particle');
-    var Drag = require('famous/physics/forces/Drag');
-    var Spring = require('famous/physics/forces/Spring');
-    var ScrollSync = require('famous/inputs/ScrollSync');
+    var ContainerSurface = require('samsara/dom/ContainerSurface');
+    var Transform = require('samsara/core/Transform');
+    var EventHandler = require('samsara/events/EventHandler');
+        //FIXME
+//     var Group = require('famous/core/Group');
+//     var Vector = require('famous/math/Vector');
+//     var PhysicsEngine = require('famous/physics/PhysicsEngine');
+//     var Particle = require('famous/physics/bodies/Particle');
+//     var Drag = require('famous/physics/forces/Drag');
+//     var Spring = require('famous/physics/forces/Spring');
+    var ScrollSync = require('samsara/inputs/ScrollInput');
     var LinkedListViewSequence = require('./LinkedListViewSequence');
 
     /**
@@ -5988,16 +5981,22 @@ define('famous-flex/ScrollController',['require','exports','module','./LayoutUti
  * ```
  * @module
  */
-define('famous-flex/layouts/ListLayout',['require','exports','module','famous/utilities/Utility','../LayoutUtility'],function(require, exports, module) {
+define('famous-flex/layouts/ListLayout',['require','exports','module','../LayoutUtility'],function(require, exports, module) {
 
     // import dependencies
-    var Utility = require('famous/utilities/Utility');
     var LayoutUtility = require('../LayoutUtility');
+
+    var CONSTANTS = {
+        DIRECTION : {
+            X : 0,
+            Y : 1
+        }
+    };
 
     // Define capabilities of this layout function
     var capabilities = {
         sequence: true,
-        direction: [Utility.Direction.Y, Utility.Direction.X],
+        direction: [CONSTANTS.DIRECTION.Y, CONSTANTS.DIRECTION.X],
         scrolling: true,
         trueSize: true,
         sequentialScrollingOptimized: true
@@ -6276,7 +6275,7 @@ define('famous-flex/FlexScrollView',['require','exports','module','./LayoutUtili
         PULLING: 1,
         ACTIVE: 2,
         COMPLETED: 3,
-        HIDDING: 4
+        HIDING: 4
     };
 
     /**
@@ -6564,14 +6563,14 @@ define('famous-flex/FlexScrollView',['require','exports','module','./LayoutUtili
                     case PullToRefreshState.COMPLETED:
                         if (!this._scroll.scrollForceCount) {
                             if (offset >= 0.2) {
-                                _setPullToRefreshState(pullToRefresh, PullToRefreshState.HIDDING);
+                                _setPullToRefreshState(pullToRefresh, PullToRefreshState.HIDING);
                             }
                             else {
                                 _setPullToRefreshState(pullToRefresh, PullToRefreshState.HIDDEN);
                             }
                         }
                         break;
-                    case PullToRefreshState.HIDDING:
+                    case PullToRefreshState.HIDING:
                         if (offset < 0.2) {
                             _setPullToRefreshState(pullToRefresh, PullToRefreshState.HIDDEN);
                         }
@@ -6895,10 +6894,10 @@ define('famous-flex/FlexScrollView',['require','exports','module','./LayoutUtili
  * ```
  * @module
  */
-define('famous-flex/VirtualViewSequence',['require','exports','module','famous/core/EventHandler'],function(require, exports, module) {
+define('famous-flex/VirtualViewSequence',['require','exports','module','samsara/events/EventHandler'],function(require, exports, module) {
 
     // import dependencies
-    var EventHandler = require('famous/core/EventHandler');
+    var EventHandler = require('samsara/events/EventHandler');
 
     /**
      * @class
@@ -7140,17 +7139,16 @@ define('famous-flex/VirtualViewSequence',['require','exports','module','famous/c
  *
  * @module
  */
-define('famous-flex/AnimationController',['require','exports','module','famous/core/View','./LayoutController','famous/core/Transform','famous/core/Modifier','famous/modifiers/StateModifier','famous/core/RenderNode','famous/utilities/Timer','famous/transitions/Easing'],function(require, exports, module) {
+define('famous-flex/AnimationController',['require','exports','module','samsara/core/View','./LayoutController','samsara/core/Transform','samsara/core/nodes/SizeNode','samsara/core/nodes/LayoutNode','samsara/core/nodes/RenderTreeNode','samsara/core/Timer'],function(require, exports, module) {
 
     // import dependencies
-    var View = require('famous/core/View');
+    var View = require('samsara/core/View');
     var LayoutController = require('./LayoutController');
-    var Transform = require('famous/core/Transform');
-    var Modifier = require('famous/core/Modifier');
-    var StateModifier = require('famous/modifiers/StateModifier');
-    var RenderNode = require('famous/core/RenderNode');
-    var Timer = require('famous/utilities/Timer');
-    var Easing = require('famous/transitions/Easing');
+    var Transform = require('samsara/core/Transform');
+    var Modifier = require('samsara/core/nodes/SizeNode');
+    var StateModifier = require('samsara/core/nodes/LayoutNode');
+    var RenderNode = require('samsara/core/nodes/RenderTreeNode');
+    var Timer = require('samsara/core/Timer');
 
     /**
      * @class
@@ -8087,7 +8085,7 @@ define('famous-flex/AnimationController',['require','exports','module','famous/c
  * Example:
  *
  * ```javascript
- * var ContainerSurface = require('famous/surfaces/ContainerSurface');
+ * var ContainerSurface = require('samsara/dom/ContainerSurface');
  * var ScrollController = require('famous-flex/ScrollController');
  * var WheelLayout = require('famous-flex/layouts/WheelLayout');
  *
@@ -8116,15 +8114,19 @@ define('famous-flex/AnimationController',['require','exports','module','famous/c
  * ```
  * @module
  */
-define('famous-flex/layouts/WheelLayout',['require','exports','module','famous/utilities/Utility'],function(require, exports, module) {
+define('famous-flex/layouts/WheelLayout',['require','exports','module'],function(require, exports, module) {
 
-    // import dependencies
-    var Utility = require('famous/utilities/Utility');
+    var CONSTANTS = {
+        DIRECTION : {
+            X : 0,
+            Y : 1
+        }
+    };
 
     // Define capabilities of this layout function
     var capabilities = {
         sequence: true,
-        direction: [Utility.Direction.Y, Utility.Direction.X],
+        direction: [CONSTANTS.DIRECTION.Y, CONSTANTS.DIRECTION.X],
         scrolling: true,
         trueSize: true,
         sequentialScrollingOptimized: false
@@ -8271,15 +8273,19 @@ define('famous-flex/layouts/WheelLayout',['require','exports','module','famous/u
  * ```
  * @module
  */
-define('famous-flex/layouts/ProportionalLayout',['require','exports','module','famous/utilities/Utility'],function(require, exports, module) {
+define('famous-flex/layouts/ProportionalLayout',['require','exports','module'],function(require, exports, module) {
 
-    // import dependencies
-    var Utility = require('famous/utilities/Utility');
+    var CONSTANTS = {
+        DIRECTION : {
+            X : 0,
+            Y : 1
+        }
+    };
 
     // Define capabilities of this layout function
     var capabilities = {
         sequence: true,
-        direction: [Utility.Direction.Y, Utility.Direction.X],
+        direction: [CONSTANTS.DIRECTION.Y, CONSTANTS.DIRECTION.X],
         scrolling: false
     };
 
@@ -8354,12 +8360,12 @@ define('famous-flex/layouts/ProportionalLayout',['require','exports','module','f
  *
  * @module
  */
-define('famous-flex/widgets/DatePickerComponents',['require','exports','module','famous/utilities/Timer','famous/core/Surface','famous/core/EventHandler'],function(require, exports, module) {
+define('famous-flex/widgets/DatePickerComponents',['require','exports','module','samsara/core/Timer','samsara/dom/Surface','samsara/events/EventHandler'],function(require, exports, module) {
 
     // import dependencies
-    var Timer = require('famous/utilities/Timer');
-    var Surface = require('famous/core/Surface');
-    var EventHandler = require('famous/core/EventHandler');
+    var Timer = require('samsara/core/Timer');
+    var Surface = require('samsara/dom/Surface');
+    var EventHandler = require('samsara/events/EventHandler');
     var MSEC_PER_DAY = (1000 * 60 * 60 * 24);
 
     /**
@@ -8747,13 +8753,12 @@ define('famous-flex/widgets/DatePickerComponents',['require','exports','module',
  * ```
  * @module
  */
-define('famous-flex/widgets/DatePicker',['require','exports','module','famous/core/View','famous/core/Surface','famous/utilities/Utility','famous/surfaces/ContainerSurface','../LayoutController','../ScrollController','../layouts/WheelLayout','../layouts/ProportionalLayout','../VirtualViewSequence','./DatePickerComponents','../LayoutUtility'],function(require, exports, module) {
+define('famous-flex/widgets/DatePicker',['require','exports','module','samsara/core/View','samsara/dom/Surface','samsara/dom/ContainerSurface','../LayoutController','../ScrollController','../layouts/WheelLayout','../layouts/ProportionalLayout','../VirtualViewSequence','./DatePickerComponents','../LayoutUtility'],function(require, exports, module) {
 
     // import dependencies
-    var View = require('famous/core/View');
-    var Surface = require('famous/core/Surface');
-    var Utility = require('famous/utilities/Utility');
-    var ContainerSurface = require('famous/surfaces/ContainerSurface');
+    var View = require('samsara/core/View');
+    var Surface = require('samsara/dom/Surface');
+    var ContainerSurface = require('samsara/dom/ContainerSurface');
     var LayoutController = require('../LayoutController');
     var ScrollController = require('../ScrollController');
     var WheelLayout = require('../layouts/WheelLayout');
@@ -9203,16 +9208,22 @@ define('famous-flex/widgets/DatePicker',['require','exports','module','famous/co
  * ```
  * @module
  */
-define('famous-flex/layouts/TabBarLayout',['require','exports','module','famous/utilities/Utility','../LayoutUtility'],function(require, exports, module) {
+define('famous-flex/layouts/TabBarLayout',['require','exports','module','../LayoutUtility'],function(require, exports, module) {
 
     // import dependencies
-    var Utility = require('famous/utilities/Utility');
     var LayoutUtility = require('../LayoutUtility');
+
+    var CONSTANTS = {
+        DIRECTION : {
+            X : 0,
+            Y : 1
+        }
+    };
 
     // Define capabilities of this layout function
     var capabilities = {
         sequence: true,
-        direction: [Utility.Direction.X, Utility.Direction.Y],
+        direction: [CONSTANTS.DIRECTION.Y, CONSTANTS.DIRECTION.X],
         trueSize: true
     };
 
@@ -9400,11 +9411,11 @@ define('famous-flex/layouts/TabBarLayout',['require','exports','module','famous/
  *
  * @module
  */
-define('famous-flex/widgets/TabBar',['require','exports','module','famous/core/Surface','famous/core/View','../LayoutController','../layouts/TabBarLayout'],function(require, exports, module) {
+define('famous-flex/widgets/TabBar',['require','exports','module','samsara/dom/Surface','samsara/core/View','../LayoutController','../layouts/TabBarLayout'],function(require, exports, module) {
 
     // import dependencies
-    var Surface = require('famous/core/Surface');
-    var View = require('famous/core/View');
+    var Surface = require('samsara/dom/Surface');
+    var View = require('samsara/core/View');
     var LayoutController = require('../LayoutController');
     var TabBarLayout = require('../layouts/TabBarLayout');
 
@@ -9680,15 +9691,16 @@ define('famous-flex/widgets/TabBar',['require','exports','module','famous/core/S
  *
  * @module
  */
-define('famous-flex/widgets/TabBarController',['require','exports','module','famous/core/View','../AnimationController','./TabBar','../helpers/LayoutDockHelper','../LayoutController','famous/transitions/Easing'],function(require, exports, module) {
+define('famous-flex/widgets/TabBarController',['require','exports','module','samsara/core/View','../AnimationController','./TabBar','../helpers/LayoutDockHelper','../LayoutController'],function(require, exports, module) {
 
     // import dependencies
-    var View = require('famous/core/View');
+    var View = require('samsara/core/View');
     var AnimationController = require('../AnimationController');
     var TabBar = require('./TabBar');
     var LayoutDockHelper = require('../helpers/LayoutDockHelper');
     var LayoutController = require('../LayoutController');
-    var Easing = require('famous/transitions/Easing');
+    //FIXME
+    // var Easing = require('famous/transitions/Easing');
 
     /**
      * @class
@@ -9976,16 +9988,22 @@ define('famous-flex/widgets/TabBarController',['require','exports','module','fam
  * but multiple rows *scroll vertically*, and this is the correct behaviour.
  * @module
  */
-define('famous-flex/layouts/CollectionLayout',['require','exports','module','famous/utilities/Utility','../LayoutUtility'],function(require, exports, module) {
+define('famous-flex/layouts/CollectionLayout',['require','exports','module','../LayoutUtility'],function(require, exports, module) {
 
     // import dependencies
-    var Utility = require('famous/utilities/Utility');
     var LayoutUtility = require('../LayoutUtility');
+
+    var CONSTANTS = {
+        DIRECTION : {
+            X : 0,
+            Y : 1
+        }
+    };
 
     // Define capabilities of this layout function
     var capabilities = {
         sequence: true,
-        direction: [Utility.Direction.Y, Utility.Direction.X],
+        direction: [CONSTANTS.DIRECTION.Y, CONSTANTS.DIRECTION.X],
         scrolling: true,
         trueSize: true,
         sequentialScrollingOptimized: true
@@ -10245,15 +10263,18 @@ define('famous-flex/layouts/CollectionLayout',['require','exports','module','fam
  * ```
  * @module
  */
-define('famous-flex/layouts/CoverLayout',['require','exports','module','famous/utilities/Utility'],function(require, exports, module) {
+define('famous-flex/layouts/CoverLayout',['require','exports','module'],function(require, exports, module) {
 
-    // import dependencies
-    var Utility = require('famous/utilities/Utility');
-
+    var CONSTANTS = {
+        DIRECTION : {
+            X : 0,
+            Y : 1
+        }
+    };
     // Define capabilities of this layout function
     var capabilities = {
         sequence: true,
-        direction: [Utility.Direction.Y, Utility.Direction.X],
+        direction: [CONSTANTS.DIRECTION.Y, CONSTANTS.DIRECTION.X],
         scrolling: true,
         trueSize: true,
         sequentialScrollingOptimized: false
@@ -10454,33 +10475,6 @@ define('famous-flex/layouts/CubeLayout',['require','exports','module'],function(
  *
  * @author: Hein Rutjes (IjzerenHein)
  * @license MIT
- * @copyright Gloey Apps, 2014
- */
-
-/*global console*/
-/*eslint no-console: 0*/
-
-/**
- * DEPRECATED - this layout has been merged into CollectionLayout, use CollectionLayout instead.
- *
- * This module will be removed in the future, please switch to CollectionLayout.
- *
- * @module
- */
-define('famous-flex/layouts/GridLayout',['require','exports','module','./CollectionLayout'],function(require, exports, module) {
-    if (console.warn) {
-        console.warn('GridLayout has been deprecated and will be removed in the future, use CollectionLayout instead');
-    }
-    module.exports = require('./CollectionLayout');
-});
-
-/**
- * This Source Code is licensed under the MIT license. If a copy of the
- * MIT-license was not distributed with this file, You can obtain one at:
- * http://opensource.org/licenses/mit-license.html.
- *
- * @author: Hein Rutjes (IjzerenHein)
- * @license MIT
  * @copyright Gloey Apps, 2014 - 2015
  */
 
@@ -10656,7 +10650,7 @@ define('famous-flex/layouts/NavBarLayout',['require','exports','module','../help
     };
 });
 
-define('template.js',['require','famous-flex/FlexScrollView','famous-flex/FlowLayoutNode','famous-flex/LayoutContext','famous-flex/LayoutController','famous-flex/LayoutNode','famous-flex/LayoutNodeManager','famous-flex/LayoutUtility','famous-flex/ScrollController','famous-flex/VirtualViewSequence','famous-flex/LinkedListViewSequence','famous-flex/AnimationController','famous-flex/widgets/DatePicker','famous-flex/widgets/TabBar','famous-flex/widgets/TabBarController','famous-flex/layouts/CollectionLayout','famous-flex/layouts/CoverLayout','famous-flex/layouts/CubeLayout','famous-flex/layouts/GridLayout','famous-flex/layouts/HeaderFooterLayout','famous-flex/layouts/ListLayout','famous-flex/layouts/NavBarLayout','famous-flex/layouts/ProportionalLayout','famous-flex/layouts/WheelLayout','famous-flex/helpers/LayoutDockHelper'],function(require) {
+define('template.js',['require','famous-flex/FlexScrollView','famous-flex/FlowLayoutNode','famous-flex/LayoutContext','famous-flex/LayoutController','famous-flex/LayoutNode','famous-flex/LayoutNodeManager','famous-flex/LayoutUtility','famous-flex/ScrollController','famous-flex/VirtualViewSequence','famous-flex/LinkedListViewSequence','famous-flex/AnimationController','famous-flex/widgets/DatePicker','famous-flex/widgets/TabBar','famous-flex/widgets/TabBarController','famous-flex/layouts/CollectionLayout','famous-flex/layouts/CoverLayout','famous-flex/layouts/CubeLayout','famous-flex/layouts/HeaderFooterLayout','famous-flex/layouts/ListLayout','famous-flex/layouts/NavBarLayout','famous-flex/layouts/ProportionalLayout','famous-flex/layouts/WheelLayout','famous-flex/helpers/LayoutDockHelper'],function(require) {
     require('famous-flex/FlexScrollView');
     require('famous-flex/FlowLayoutNode');
     require('famous-flex/LayoutContext');
@@ -10676,7 +10670,6 @@ define('template.js',['require','famous-flex/FlexScrollView','famous-flex/FlowLa
     require('famous-flex/layouts/CollectionLayout');
     require('famous-flex/layouts/CoverLayout');
     require('famous-flex/layouts/CubeLayout');
-    require('famous-flex/layouts/GridLayout');
     require('famous-flex/layouts/HeaderFooterLayout');
     require('famous-flex/layouts/ListLayout');
     require('famous-flex/layouts/NavBarLayout');
